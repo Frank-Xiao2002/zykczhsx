@@ -1,5 +1,8 @@
+import com.alibaba.druid.pool.DruidDataSource;
+import com.xxj.Axe;
 import com.xxj.MyConfig;
 import com.xxj.beans.DemoBean;
+import com.xxj.spring02.Person;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -40,7 +43,23 @@ public class MyTest {
     @Test
     void testDemoBean() {
         DemoBean demoBean = context.getBean(DemoBean.class);
-        System.out.println(demoBean);
+        Axe axe = context.getBean(Axe.class);
+        System.out.println("demoBean = " + demoBean);
+        System.out.println("axe = " + axe);
     }
 
+    /**
+     * Test Druid Bean instantiation
+     */
+    @Test
+    void testDruidBean() {
+        DruidDataSource dataSource = context.getBean(DruidDataSource.class);
+        System.out.println("dataSource = " + dataSource);
+    }
+
+    @Test
+    void testPersonAndPen() {
+        Person person = (Person) context.getBean("person");
+        person.write();
+    }
 }
